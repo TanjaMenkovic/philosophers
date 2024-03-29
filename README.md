@@ -1,0 +1,2 @@
+# philosophers
+Hive school project.
