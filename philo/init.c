@@ -27,7 +27,7 @@ static t_data	init_input(int argc, char **argv)
 	return (input_data);
 }
 
-void	init_forks(t_locks	*l, pthread_mutex_t *forks, int count)
+int	init_forks(t_locks	*l, pthread_mutex_t *forks, int count)
 {
 	int	i;
 
@@ -35,9 +35,10 @@ void	init_forks(t_locks	*l, pthread_mutex_t *forks, int count)
 	while (i < count)
 	{
 		if (pthread_mutex_init(&forks[i], NULL) != 0)
-			destroy_all(l, "[Mutex Init ERROR]\n", i, 1);
+			return (destroy_all(l, "[Mutex Init ERROR]\n", i, 1));
 		i++;
 	}
+	return (0);
 }
 
 void	init_philos(t_philo *p, pthread_mutex_t *forks,
@@ -64,11 +65,12 @@ void	init_philos(t_philo *p, pthread_mutex_t *forks,
 	}
 }
 
-void	init_locks(t_locks *l, t_philo *p, pthread_mutex_t *forks)
+int	init_locks(t_locks *l, t_philo *p, pthread_mutex_t *forks)
 {
 	l->forks = forks;
 	l->philos = p;
 	if (pthread_mutex_init(&l->write_lock, NULL) != 0
 			|| pthread_mutex_init(&l->meal_lock, NULL) != 0)
-		destroy_all(l, "[Mutex Init ERROR]\n", -1, 1);
+		return (destroy_all(l, "[Mutex Init ERROR]\n", -1, 1));
+	return (0);
 }
