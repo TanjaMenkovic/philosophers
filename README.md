@@ -2,7 +2,7 @@
 Hive school project.
 
 
-- create get_current_time() and destroy_all() functions.
+- I can't use exit! change it everywhere!
 - fix init.c
 - add functions for freeing malloc
 - test is everything working that is made by now.
