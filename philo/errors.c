@@ -12,14 +12,26 @@
 
 #include "philo.h"
 
-void	error_msg(char *s)
+int	error_msg(char *s, int signal)
 {
 	write(2, "Error: ", 7);
 	if (!s)
 	{
 		write(2, "Error: Unknown error\n", 21);
-		exit(1);
+		return(signal);
 	}
 	write(2, s, ft_strlen(s));
-	exit(1);
+	return(signal);
+}
+
+int	destroy_all(t_locks *l, char *str, int count, int signal)
+{
+	while (count > 0)
+	{
+		count--;
+		pthread_mutex_destroy(&l->forks[count]);
+	}
+	pthread_mutex_destroy(&l->write_lock);
+	pthread_mutex_destroy(&l->meal_lock);
+	return (error_msg(str, signal));
 }
