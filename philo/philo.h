@@ -62,11 +62,18 @@ typedef struct	s_locks
 int		ft_strlen(char *str);
 int		ft_atoi(char *str);
 
+/* utils_philo.c */
+int	get_current_time(void);
+void	print_action(t_philo *p, char *action);
+
 /* errors.c */
-void	error_msg(char *s);
+int		error_msg(char *s, int signal);
+int		destroy_all(t_locks *l, char *str, int count, int signal);
 
 /* init.c */
-void	init_philos(t_philo *p, pthread_mutex_t *forks, int argc, char **argv);
+int		init_forks(t_locks	*l, pthread_mutex_t *forks, int count);
+void	init_philos(t_philo *p, pthread_mutex_t *forks, t_locks *l,	int argc, char **argv);
+int		init_locks(t_locks *l, t_philo *p, pthread_mutex_t *forks);
 
 /* print.c */
 void	print_data(t_data input_data);
