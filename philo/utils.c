@@ -38,12 +38,3 @@ int	ft_atoi(char *str)
 		return (-1);
 	return (res);
 }
-
-int	get_current_time(void)
-{
-	t_timeval	time;
-
-	if (gettimeofday(&time, NULL) == -1)
-		error_msg("gettimeofday\n");
-	return (time.tv_sec * 1000 + time.tv_usec / 1000);
-}
