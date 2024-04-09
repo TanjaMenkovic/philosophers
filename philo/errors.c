@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-int	error_msg(char *s, int signal)
+int	error_msg(char *s)
 {
 	write(2, "Error: ", 7);
 	if (!s)
@@ -21,10 +21,10 @@ int	error_msg(char *s, int signal)
 		return(signal);
 	}
 	write(2, s, ft_strlen(s));
-	return(signal);
+	return(1);
 }
 
-int	destroy_all(t_locks *l, char *str, int count, int signal)
+int	destroy_all(t_locks *l, char *str, int count)
 {
 	while (count > 0)
 	{
@@ -33,5 +33,5 @@ int	destroy_all(t_locks *l, char *str, int count, int signal)
 	}
 	pthread_mutex_destroy(&l->write_lock);
 	pthread_mutex_destroy(&l->meal_lock);
-	return (error_msg(str, signal));
+	return (error_msg(str));
 }
