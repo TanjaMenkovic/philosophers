@@ -41,10 +41,10 @@ int	init_forks(t_locks	*l, pthread_mutex_t *forks, int count)
 	return (0);
 }
 
-void	init_philos(t_philo *p, pthread_mutex_t *forks,
-	   t_locks *l,	int argc, char **argv)
+t_philo	*init_philos(pthread_mutex_t *forks, t_locks *l, int argc, char **argv)
 {
-	int	i;
+	int		i;
+	t_philo	*p;
 
 	i = 0;
 	while (i < ft_atoi(argv[1]))
