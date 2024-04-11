@@ -12,6 +12,11 @@
 
 #include "philo.h"
 
+/* init_input function initializes the t_data structure with input parameters 
+passed through the command line arguments argv. It extracts the number of philosophers, 
+the time for a philosopher to die, the time for a philosopher to eat, and the time for 
+a philosopher to sleep from argv. If the argument count argc is 6, it also extracts the 
+number of meals each philosopher must eat. It then returns the initialized t_data structure. */
 static t_data	init_input(int argc, char **argv)
 {
 	t_data	input_data;
@@ -27,6 +32,10 @@ static t_data	init_input(int argc, char **argv)
 	return (input_data);
 }
 
+/* init_forks function initializes the mutex locks for forks used by the philosophers. It 
+iterates over each fork, initializes the mutex using pthread_mutex_init(), and if any 
+initialization fails, it calls destroy_all() to clean up already initialized mutexes and 
+returns an error code. */
 int	init_forks(t_locks	*l, pthread_mutex_t *forks, int count)
 {
 	int	i;
@@ -41,6 +50,9 @@ int	init_forks(t_locks	*l, pthread_mutex_t *forks, int count)
 	return (0);
 }
 
+/* init_data function initializes the data for each philosopher. It calls init_input() 
+to get the initial data for each philosopher based on command-line arguments. It initializes 
+each philosopher's data field with this input data. */
 void	init_data(t_philo *p, int argc, char **argv)
 {
 	int		i;
@@ -53,6 +65,10 @@ void	init_data(t_philo *p, int argc, char **argv)
 	}
 }
 
+/* init_philos function initializes the philosopher structures. It sets the philosopher's rank 
+number, number of meals eaten, last meal time, and born time. It also assigns the mutex locks 
+for the left and right forks, ensuring correct assignment even for edge cases like the first and 
+last philosopher. Additionally, it assigns the mutex locks for writing and meal counting. */
 void	init_philos(t_philo *p, pthread_mutex_t *fork, t_locks *l, char **argv)
 {
 	int		i;
@@ -75,6 +91,10 @@ void	init_philos(t_philo *p, pthread_mutex_t *fork, t_locks *l, char **argv)
 	}
 }
 
+/* init_locks function initializes the mutex locks for writing and meal counting (write_lock and 
+meal_lock), and it assigns the array of forks and philosophers to the corresponding fields in the 
+t_locks structure. If any initialization of mutex locks fails, it calls destroy_all() to clean up 
+initialized mutexes and returns an error code. */
 int	init_locks(t_locks *l, t_philo *p, pthread_mutex_t *forks)
 {
 	l->forks = forks;
