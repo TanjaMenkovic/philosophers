@@ -24,6 +24,10 @@ int	error_msg(char *s)
 	return (1);
 }
 
+/* destroy_all function destroys all mutex locks and then prints an error message. 
+It iterates through the mutex locks in reverse order and destroys each one using 
+pthread_mutex_destroy(). After destroying all mutex locks, it returns the result 
+of calling error_msg(str). The str parameter contains an error message to be printed. */
 int	destroy_all(t_locks *l, char *str, int count)
 {
 	while (count > 0)
