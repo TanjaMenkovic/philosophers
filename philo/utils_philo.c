@@ -12,6 +12,8 @@
 
 #include "philo.h"
 
+/* It uses gettimeofday() to get the current time in microseconds and then 
+converts it to milliseconds before returning the result. */
 int	get_current_time(void)
 {
 	t_timeval	time;
